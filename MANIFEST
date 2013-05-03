@@ -1,12 +1,16 @@
-bin/fixup_install
 Changes
+inc/TeX/XDV/Print.pm
 INSTALL
 lib/TeX/XDV/Parse.pm
 Makefile.PL
 MANIFEST			This list of files
+MANIFEST.SKIP
 README
 t/_load.t
-txt/INSTALL.in
-txt/README.in
+t/print.cmp
+t/print.t
+t/print.tex
+t/print.xdv
+TODO
 META.yml                                 Module YAML meta-data (added by MakeMaker)
 META.json                                Module JSON meta-data (added by MakeMaker)

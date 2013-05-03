@@ -3,7 +3,11 @@ abstract: 'Perl extension for parsing TeX XDV files'
 author:
   - 'Rick Myers <jrm@cpan.org>'
 build_requires:
+  Exporter: 0
   Test::More: 0
+  Text::Diff: 0
+  strict: 0
+  warnings: 0
 configure_requires:
   ExtUtils::MakeMaker: 0
 dynamic_config: 1
@@ -18,5 +22,9 @@ no_index:
     - t
     - inc
 requires:
+  Exporter: 0
   TeX::DVI::Parse: 0
-version: 0.01
+  constant: 0
+  strict: 0
+  warnings: 0
+version: 0.02

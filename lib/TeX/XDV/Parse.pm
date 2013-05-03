@@ -1,24 +1,51 @@
 package TeX::XDV::Parse;
 use strict;
 use warnings;
+use Exporter 'import';
 
 require TeX::DVI::Parse;
 
-@TeX::XDV::Parse::ISA = 'TeX::DVI::Parse';
+$TeX::XDV::Parse::VERSION = '0.02';
 
-$TeX::XDV::Parse::VERSION = '0.01';
+@TeX::XDV::Parse::ISA = qw/TeX::DVI::Parse/;
 
-use constant {  # from xdvipdfmx
-    XDV_FLAG_FONTTYPE_ATSUI => 0x0001,
-    XDV_FLAG_FONTTYPE_ICU   => 0x0002,
-    XDV_FLAG_VERTICAL       => 0x0100,
-    XDV_FLAG_COLORED        => 0x0200,
-    XDV_FLAG_FEATURES       => 0x0400,
-    XDV_FLAG_VARIATIONS     => 0x0800,
-    XDV_FLAG_EXTEND         => 0x1000,
-    XDV_FLAG_SLANT          => 0x2000,
-    XDV_FLAG_EMBOLDEN       => 0x4000,
-};
+@TeX::XDV::Parse::EXPORT_OK = qw(
+    XDV_FLAG_FONTTYPE_ATSUI
+    XDV_FLAG_FONTTYPE_ICU
+    XDV_FLAG_VERTICAL
+    XDV_FLAG_COLORED
+    XDV_FLAG_FEATURES
+    XDV_FLAG_VARIATIONS
+    XDV_FLAG_EXTEND
+    XDV_FLAG_SLANT
+    XDV_FLAG_EMBOLDEN
+);
+
+%TeX::XDV::Parse::EXPORT_TAGS = (
+    'constants' => [qw/
+        XDV_FLAG_FONTTYPE_ATSUI
+        XDV_FLAG_FONTTYPE_ICU
+        XDV_FLAG_VERTICAL
+        XDV_FLAG_COLORED
+        XDV_FLAG_FEATURES
+        XDV_FLAG_VARIATIONS
+        XDV_FLAG_EXTEND
+        XDV_FLAG_SLANT
+        XDV_FLAG_EMBOLDEN
+    /],
+);
+
+# from xdvipdfmx
+# no hash interface before 5.8 for constant
+use constant XDV_FLAG_FONTTYPE_ATSUI => 0x0001;
+use constant XDV_FLAG_FONTTYPE_ICU   => 0x0002;
+use constant XDV_FLAG_VERTICAL       => 0x0100;
+use constant XDV_FLAG_COLORED        => 0x0200;
+use constant XDV_FLAG_FEATURES       => 0x0400;
+use constant XDV_FLAG_VARIATIONS     => 0x0800;
+use constant XDV_FLAG_EXTEND         => 0x1000;
+use constant XDV_FLAG_SLANT          => 0x2000;
+use constant XDV_FLAG_EMBOLDEN       => 0x4000;
 
 # Hmm.. either way we do this, the dispatcher in DVI::Parse
 # sees the same thing. Either way, it ends up calling either
@@ -279,33 +306,56 @@ B<x_loc> and B<y_loc> pairs.
 B<glyph> is the glyph id of the character to set in the current font,
 which isn't necessarily the same as the characters ordinal value.
 
-=head2 native_font_def( $k, $ps, $fl, $p_len, $f_len, $s_len, $n, $f, $s, $c, $n, $v, $ext, $slt, $emb )
+=head2 native_font_def($k,$ps,$fl,$p_len,$f_len,$s_len,$n,$f,$s,@more)
 
 Defines a font.
 
-      k : font id
-     ps : point size in TeX units
-     fl : flags
-  p_len : ps name len
-  f_len : family name len
-  s_len : style name len
-      n : font_name
-      f : fam_name
-      s : sty_name
-      c : rgba_color
-      n : nvars
-      v : variations * nvars
-    ext : extend
-    slt : slant
-    emb : embolden
+       k : font id
+      ps : point size in TeX units
+      fl : flags
+   p_len : ps name len
+   f_len : family name len
+   s_len : style name len
+       n : font_name
+       f : fam_name
+       s : sty_name
+       c : rgba_color
+    nvar : nvars
+     var : variations * nvars
+  extend : extend
+   slant : slant
+    bold : embolden
 
-Many of these are unknown. B<k>, B<ps>, and B<n> are the only ones seen
-so far. See the source code for some flag constants and how the command is
-decoded. Any information regarding this, or documentation patches welcome.
+The B<@more> element may or may not contain further information depending
+on the B<fl> flags. If the appropriate flag is set, the corresponding
+element will be present. If not, the element will be missing. Be sure
+these checks are done in order or confusion will ensue.
+
+  XDV_FLAG_COLORED    => rgba_color
+  XDV_FLAG_VARIATIONS => nvar, var
+  XDV_FLAG_EXTEND     => extend
+  XDV_FLAG_SLANT      => slant
+  XDV_FLAG_EMBOLDEN   => bold
+
+The B<nvar> element naturally enumerates the B<var> variations, if
+present. Each variation is itself two elements: axis and value.
 
 =head1 EXPORT
 
-None.
+None, by default.
+
+On request, the following flags are available either individually or
+together through the ":constants" tag:
+
+  XDV_FLAG_FONTTYPE_ATSUI
+  XDV_FLAG_FONTTYPE_ICU
+  XDV_FLAG_VERTICAL
+  XDV_FLAG_COLORED
+  XDV_FLAG_FEATURES
+  XDV_FLAG_VARIATIONS
+  XDV_FLAG_EXTEND
+  XDV_FLAG_SLANT
+  XDV_FLAG_EMBOLDEN
 
 =head1 SEE ALSO
 

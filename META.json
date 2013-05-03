@@ -22,7 +22,11 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::More" : "0"
+            "Exporter" : "0",
+            "Test::More" : "0",
+            "Text::Diff" : "0",
+            "strict" : "0",
+            "warnings" : "0"
          }
       },
       "configure" : {
@@ -32,10 +36,14 @@
       },
       "runtime" : {
          "requires" : {
-            "TeX::DVI::Parse" : "0"
+            "Exporter" : "0",
+            "TeX::DVI::Parse" : "0",
+            "constant" : "0",
+            "strict" : "0",
+            "warnings" : "0"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0.01"
+   "version" : "0.02"
 }

@@ -1,4 +1,4 @@
-TeX-XDV-Parse version 0.01
+TeX-XDV-Parse version 0.02
 ==========================
 
     TeX::XDV::Parse is an extension of TeX::DVI::Parse, much as XDV is an
@@ -34,11 +34,19 @@ DEPENDENCIES
 
     Running this module requires these other modules and libraries:
 
+        strict
+        warnings
+        constant
+        Exporter
         TeX::DVI::Parse
 
     In addition, building and testing this modules requires the following:
 
+        strict
+        warnings
+        Exporter
         Test::More
+        Text::Diff
 
 
 COPYRIGHT AND LICENSE

@@ -13,11 +13,19 @@ DEPENDENCIES
 
     Running this module requires these other modules and libraries:
 
+        strict
+        warnings
+        constant
+        Exporter
         TeX::DVI::Parse
 
     In addition, building and testing this modules requires the following:
 
+        strict
+        warnings
+        Exporter
         Test::More
+        Text::Diff
 
 
 COPYRIGHT AND LICENSE
