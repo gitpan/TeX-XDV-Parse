@@ -5,7 +5,7 @@ use Exporter 'import';
 
 require TeX::DVI::Parse;
 
-$TeX::XDV::Parse::VERSION = '0.03';
+$TeX::XDV::Parse::VERSION = '0.04';
 
 @TeX::XDV::Parse::ISA = qw/TeX::DVI::Parse/;
 

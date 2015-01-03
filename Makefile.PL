@@ -1,4 +1,6 @@
 use 5.005;
+use strict;
+use warnings;
 use File::Basename ();
 use ExtUtils::MakeMaker;
 
@@ -44,7 +46,7 @@ WriteMakefile(
             t/tex/print.tex
         }],
         RUN_MODULES    => [ sort mysort keys %$run_mods ],
-        BUILD_MODULES  => [ sort mysort keys {%$build_mods, %$config_mods} ],
+        BUILD_MODULES  => [ sort mysort keys %{{%$build_mods, %$config_mods}} ],
     },
 );
 

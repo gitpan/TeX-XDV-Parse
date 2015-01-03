@@ -1,5 +1,8 @@
 Revision history for Perl extension TeX::XDV::Parse.
 
+0.04  Sat Jan  3 13:42:47 EST 2015
+    - use strict; use warnings; in Makefile.PL (sheese)
+
 0.03  Sat Jan  3 06:15:11 EST 2015
     - version bump - hasnt been tested in a while
     - updated copyright notice
