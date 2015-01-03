@@ -5,7 +5,7 @@ use Exporter 'import';
 
 require TeX::DVI::Parse;
 
-$TeX::XDV::Parse::VERSION = '0.02';
+$TeX::XDV::Parse::VERSION = '0.03';
 
 @TeX::XDV::Parse::ISA = qw/TeX::DVI::Parse/;
 
@@ -66,6 +66,9 @@ push @TeX::DVI::Parse::COMMANDS, (
     'undefined_command'                             # 256, not possible
 );
 
+sub make_glyph_string { make_glyph_thingy( 0, @_ ) }
+sub make_glyph_array  { make_glyph_thingy( 1, @_ ) }
+
 sub make_glyph_thingy {
     my $is_array = shift;
     my $buff = pop @_;
@@ -90,9 +93,6 @@ sub make_glyph_thingy {
 
     return @_, @list, $buff;
 }
-
-sub make_glyph_string { make_glyph_thingy( 0, @_ ) }
-sub make_glyph_array  { make_glyph_thingy( 1, @_ ) }
 
 sub make_pic_file {
     my $buff = pop @_;
@@ -199,6 +199,15 @@ sub undefined_command {
 
 __END__
 
+=begin readme text
+
+TeX::XDV::Parse version __VERSION__
+============================
+
+=end readme
+
+=for install,readme stop
+
 =head1 NAME
 
 TeX::XDV::Parse - Perl extension for parsing TeX XDV files
@@ -215,6 +224,8 @@ TeX::XDV::Parse - Perl extension for parsing TeX XDV files
   sub glyph_string {...}
   sub native_font_def {...}
 
+=for readme continue
+
 =head1 DESCRIPTION
 
 TeX::XDV::Parse is an extension of TeX::DVI::Parse, much as XDV is
@@ -230,7 +241,16 @@ arguments. For example:
     ...
   }
 
+The additional XDV commands are B<dir>, B<glyph_string>, B<glyph_array>,
+B<pic_file>, and B<native_font_def>. Optionally, the XDV flag constants
+are also available for import.
+
+An example module, B<TeX::XDV::Print>, is available in the source
+distribution package under the B<inc> directory.
+
 See the TeX::DVI::Parse documentation for details on the DVI commands.
+
+=for readme stop
 
 =head1 METHODS
 
@@ -365,9 +385,32 @@ TeX::DVI::Parse
 
 Rick Myers, E<lt>jrm at cpan dot orgE<gt>
 
+=begin install,readme
+
+=head1 DEPENDENCIES
+
+Running this module requires these other modules and libraries:
+
+    __RUN_MODULES__
+
+In addition, building and testing this module requires the following:
+
+    __BUILD_MODULES__
+
+=head1 INSTALLATION
+
+To install TeX::XDV::Parse type the following:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+=end install,readme
+
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2013 by Rick Myers
+Copyright (C) 2013-2015 by Rick Myers
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.16.3 or,

@@ -1,7 +1,6 @@
 
-^txt/
 ^bin/
-^t/print.out$
+^t/tex/[a-z]+\.out$
 
 #!start included /usr/lib/perl5/5.16.3/ExtUtils/MANIFEST.SKIP
 # Avoid version control files.

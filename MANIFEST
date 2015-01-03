@@ -7,10 +7,15 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 README
 t/_load.t
-t/print.cmp
+t/color.t
+t/pod.t
 t/print.t
-t/print.tex
-t/print.xdv
+t/tex/color.cmp
+t/tex/color.tex
+t/tex/color.xdv
+t/tex/print.cmp
+t/tex/print.tex
+t/tex/print.xdv
 TODO
 META.yml                                 Module YAML meta-data (added by MakeMaker)
 META.json                                Module JSON meta-data (added by MakeMaker)

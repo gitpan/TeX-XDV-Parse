@@ -5,9 +5,9 @@ use Text::Diff ();
 BEGIN { plan tests => 4 }
 use_ok('TeX::XDV::Print' );
 
-my $xdv = new_ok( 'TeX::XDV::Print', ['t/tex/print.xdv'] );
+my $xdv = new_ok( 'TeX::XDV::Print', ['t/tex/color.xdv'] );
 
-open OUT, '> t/tex/print.out';
+open OUT, '> t/tex/color.out';
 select OUT;
 
 $xdv->parse;
@@ -18,8 +18,8 @@ close OUT;
 
 {
     local $/;
-    open IN,  '< t/tex/print.out';
-    open CMP, '< t/tex/print.cmp';
+    open IN,  '< t/tex/color.out';
+    open CMP, '< t/tex/color.cmp';
     my $out = <IN>;
     my $cmp = <CMP>;
 
